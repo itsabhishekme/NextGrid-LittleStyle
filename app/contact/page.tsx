@@ -3,40 +3,57 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+type FormType = {
+  name: string;
+  email: string;
+  message: string;
+};
+
+type ErrorType = {
+  name?: string;
+  email?: string;
+  message?: string;
+};
+
 export default function Contact() {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<FormType>({
     name: "",
     email: "",
     message: "",
   });
 
-  const [errors, setErrors] = useState<any>({});
+  const [errors, setErrors] = useState<ErrorType>({});
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
 
-  const validate = () => {
-    let err: any = {};
+  // ✅ Validation
+  const validate = (): ErrorType => {
+    const err: ErrorType = {};
 
-    if (form.name.trim().length < 2)
+    if (form.name.trim().length < 2) {
       err.name = "Enter valid name";
+    }
 
-    if (!/^\S+@\S+\.\S+$/.test(form.email))
+    if (!/^\S+@\S+\.\S+$/.test(form.email)) {
       err.email = "Enter valid email";
+    }
 
-    if (form.message.trim().length < 10)
+    if (form.message.trim().length < 10) {
       err.message = "Minimum 10 characters";
+    }
 
     return err;
   };
 
-  const handleSubmit = (e: any) => {
+  // ✅ Submit
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (loading) return;
 
     const v = validate();
-    if (Object.keys(v).length) {
+    if (Object.keys(v).length > 0) {
       setErrors(v);
       return;
     }
@@ -56,9 +73,7 @@ export default function Contact() {
 
       {/* HERO */}
       <div className="text-center max-w-4xl mx-auto mb-16">
-        <h1 className="text-5xl font-extrabold">
-          Let’s Talk 💬
-        </h1>
+        <h1 className="text-5xl font-extrabold">Let’s Talk 💬</h1>
         <p className="text-gray-600 mt-4">
           Have questions or ideas? We’d love to hear from you.
         </p>
@@ -76,51 +91,34 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="space-y-6">
 
               {/* NAME */}
-              <div className="relative">
+              <div>
                 <input
-                  placeholder=" "
-                  className="peer w-full border p-3 rounded-xl focus:ring-2 focus:ring-pink-400 outline-none"
+                  type="text"
+                  required
+                  placeholder="Name"
+                  className="w-full border p-3 rounded-xl focus:ring-2 focus:ring-pink-400 outline-none"
                   value={form.name}
                   onChange={(e) =>
                     setForm({ ...form, name: e.target.value })
                   }
                 />
-                <label
-                  className={`absolute left-3 bg-white px-1 text-gray-500 transition-all duration-200 
-                  ${
-                    form.name
-                      ? "-top-2 text-sm text-pink-500"
-                      : "top-3 text-base"
-                  }`}
-                >
-                  Name
-                </label>
                 {errors.name && (
                   <p className="text-red-500 text-sm mt-1">{errors.name}</p>
                 )}
               </div>
 
               {/* EMAIL */}
-              <div className="relative">
+              <div>
                 <input
                   type="email"
-                  placeholder=" "
-                  className="peer w-full border p-3 rounded-xl focus:ring-2 focus:ring-pink-400"
+                  required
+                  placeholder="Email"
+                  className="w-full border p-3 rounded-xl focus:ring-2 focus:ring-pink-400"
                   value={form.email}
                   onChange={(e) =>
                     setForm({ ...form, email: e.target.value })
                   }
                 />
-                <label
-                  className={`absolute left-3 bg-white px-1 text-gray-500 transition-all duration-200 
-                  ${
-                    form.email
-                      ? "-top-2 text-sm text-pink-500"
-                      : "top-3 text-base"
-                  }`}
-                >
-                  Email
-                </label>
                 {errors.email && (
                   <p className="text-red-500 text-sm mt-1">{errors.email}</p>
                 )}
@@ -130,16 +128,16 @@ export default function Contact() {
               <div>
                 <textarea
                   rows={5}
-                  className="w-full border p-3 rounded-xl focus:ring-2 focus:ring-pink-400 outline-none"
+                  required
                   placeholder="Your Message"
+                  className="w-full border p-3 rounded-xl focus:ring-2 focus:ring-pink-400 outline-none"
                   value={form.message}
                   onChange={(e) =>
                     setForm({ ...form, message: e.target.value })
                   }
                 />
-
                 <div className="flex justify-between text-xs text-gray-500">
-                  <span>{errors.message}</span>
+                  <span className="text-red-500">{errors.message}</span>
                   <span>{form.message.length}/200</span>
                 </div>
               </div>
@@ -172,8 +170,8 @@ export default function Contact() {
                 We’ll reply within 24 hours.
               </p>
 
-              {/* ✅ RESET BUTTON */}
               <button
+                type="button"
                 onClick={() => setSubmitted(false)}
                 className="mt-6 bg-pink-500 text-white px-6 py-2 rounded-full"
               >
@@ -196,19 +194,21 @@ export default function Contact() {
           </div>
 
           <iframe
+            title="Google Map"
             src="https://maps.google.com/maps?q=india&t=&z=5&ie=UTF8&iwloc=&output=embed"
             className="w-full h-48 rounded-2xl shadow"
           />
         </div>
       </div>
 
-      {/* FAQ FIX */}
+      {/* FAQ */}
       <div className="max-w-4xl mx-auto mt-20">
         <h2 className="text-3xl font-bold text-center mb-8">FAQs</h2>
 
         {[1, 2].map((_, i) => (
           <div key={i} className="bg-white rounded-xl mb-3 shadow overflow-hidden">
             <button
+              type="button"
               onClick={() =>
                 setActiveFAQ(activeFAQ === i ? null : i)
               }
