@@ -3,28 +3,36 @@
 import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
+
+type Product = {
+  id: string;
+  name: string;
+  price: number;
+  image?: string;
+};
 
 export default function CartPage() {
   const { cart, removeFromCart, clearCart } = useCart();
 
-  const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
+  // ✅ quantity by product id (FIXED)
+  const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
   const [coupon, setCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
 
-  const updateQty = (index: number, change: number) => {
+  const updateQty = (id: string, change: number) => {
     setQuantities((prev) => ({
       ...prev,
-      [index]: Math.max(1, (prev[index] || 1) + change),
+      [id]: Math.max(1, (prev[id] || 1) + change),
     }));
   };
 
-  const getQty = (index: number) => quantities[index] || 1;
+  const getQty = (id: string) => quantities[id] || 1;
 
   const subtotal = cart.reduce(
-    (acc: number, item: any, i: number) =>
-      acc + item.price * getQty(i),
+    (acc: number, item: Product) =>
+      acc + item.price * getQty(item.id),
     0
   );
 
@@ -61,7 +69,7 @@ export default function CartPage() {
         )}
       </div>
 
-      {/* EMPTY */}
+      {/* EMPTY STATE */}
       {cart.length === 0 ? (
         <motion.div
           initial={{ opacity: 0 }}
@@ -86,9 +94,9 @@ export default function CartPage() {
           {/* ITEMS */}
           <div className="md:col-span-2 space-y-6">
 
-            {cart.map((item: any, i: number) => (
+            {cart.map((item: Product) => (
               <motion.div
-                key={i}
+                key={item.id} // ✅ FIXED (no index)
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-white p-5 rounded-3xl shadow-md flex gap-5"
@@ -106,20 +114,34 @@ export default function CartPage() {
                   <h3 className="font-semibold text-lg">{item.name}</h3>
                   <p className="text-pink-500 font-bold">₹{item.price}</p>
 
-                  <div className="flex gap-3 mt-4">
-                    <button onClick={() => updateQty(i, -1)}>-</button>
-                    <span>{getQty(i)}</span>
-                    <button onClick={() => updateQty(i, 1)}>+</button>
+                  {/* QUANTITY */}
+                  <div className="flex gap-3 mt-4 items-center">
+                    <button
+                      onClick={() => updateQty(item.id, -1)}
+                      className="px-2 py-1 bg-gray-200 rounded"
+                    >
+                      -
+                    </button>
+
+                    <span>{getQty(item.id)}</span>
+
+                    <button
+                      onClick={() => updateQty(item.id, 1)}
+                      className="px-2 py-1 bg-gray-200 rounded"
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
 
+                {/* PRICE + REMOVE */}
                 <div className="text-right">
                   <p className="font-bold">
-                    ₹{item.price * getQty(i)}
+                    ₹{item.price * getQty(item.id)}
                   </p>
 
                   <button
-                    onClick={() => removeFromCart(i)}
+                    onClick={() => removeFromCart(item.id)} // ✅ FIXED
                     className="text-red-500 text-sm"
                   >
                     Remove
@@ -135,7 +157,7 @@ export default function CartPage() {
 
             <h2 className="text-xl font-bold mb-4">Summary</h2>
 
-            {/* FREE SHIPPING BAR */}
+            {/* SHIPPING BAR */}
             <div className="mb-4">
               <div className="h-2 bg-gray-200 rounded">
                 <div
@@ -168,7 +190,7 @@ export default function CartPage() {
               </button>
             </div>
 
-            {/* PRICING */}
+            {/* PRICE */}
             <div className="space-y-2 text-gray-600">
               <div className="flex justify-between">
                 <span>Subtotal</span>
