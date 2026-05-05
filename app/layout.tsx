@@ -2,6 +2,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 
@@ -113,6 +114,9 @@ export default function RootLayout({
             </footer>
 
           </div>
+
+          {/* 📈 Vercel Analytics */}
+          <Analytics />
 
         </CartProvider>
       </body>
