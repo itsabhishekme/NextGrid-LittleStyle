@@ -1,159 +1,586 @@
 "use client";
 
 import { Analytics } from "@vercel/analytics/react";
+
 import { products } from "@/data/products";
+
 import ProductCard from "@/components/ProductCard";
+
 import Link from "next/link";
+
 import Image from "next/image";
+
 import { motion } from "framer-motion";
+
+import {
+  ArrowRight,
+  Sparkles,
+  ShieldCheck,
+  Truck,
+  HeartHandshake,
+  Star,
+  ShoppingBag,
+} from "lucide-react";
 
 export default function Home() {
   const featuredProducts = products.slice(0, 6);
 
+  const categories = [
+    {
+      name: "Onesies",
+      image: "/cat1.jpg",
+    },
+    {
+      name: "T-Shirts",
+      image: "/cat2.jpg",
+    },
+    {
+      name: "Dresses",
+      image: "/cat3.jpg",
+    },
+    {
+      name: "Winter Wear",
+      image: "/cat4.jpg",
+    },
+  ];
+
+  const testimonials = [
+    {
+      name: "Sophia",
+      text: "Absolutely amazing quality and super soft fabric.",
+    },
+    {
+      name: "Emma",
+      text: "Perfect for my baby. Stylish and comfortable.",
+    },
+    {
+      name: "Olivia",
+      text: "Best kids fashion store I've ever purchased from.",
+    },
+  ];
+
   return (
     <>
-      <div className="space-y-24">
+      <div className="relative overflow-hidden">
 
-        {/* 🌟 HERO */}
-        <section className="grid md:grid-cols-2 gap-10 items-center bg-gradient-to-r from-pink-100 to-blue-100 rounded-3xl p-10">
+        {/* ================= BACKGROUND ================= */}
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <h1 className="text-5xl font-extrabold leading-tight">
-              Premium Baby Fashion 👶
-            </h1>
+        <div className="absolute inset-0 -z-10 overflow-hidden">
 
-            <p className="text-gray-600 mt-4 text-lg">
-              Comfort meets style for your little ones.
-            </p>
+          <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-pink-300/20 rounded-full blur-[120px]" />
 
-            <Link
-              href="/products"
-              className="inline-block mt-6 bg-pink-500 text-white px-6 py-3 rounded-full shadow hover:bg-pink-600"
-            >
-              Shop Now →
-            </Link>
-          </motion.div>
+          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-300/20 rounded-full blur-[120px]" />
 
-          <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }}>
-            <Image
-              src="/baby-hero.jpg"
-              alt="Baby"
-              width={500}
-              height={400}
-              className="rounded-3xl shadow-xl"
-            />
-          </motion.div>
+          <div className="absolute top-[40%] left-[40%] w-[400px] h-[400px] bg-blue-200/10 rounded-full blur-[100px]" />
 
-        </section>
+        </div>
 
-        {/* 📊 STATS */}
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          {["10K+", "500+", "4.9⭐", "100%"].map((v, i) => (
-            <div key={i} className="bg-white p-6 rounded-2xl shadow">
-              <h3 className="text-2xl font-bold text-pink-500">{v}</h3>
-              <p className="text-gray-500 text-sm">Happy Customers</p>
+        <div className="space-y-32">
+
+          {/* ================= HERO ================= */}
+
+          <section className="relative overflow-hidden rounded-[40px] bg-gradient-to-br from-pink-100 via-white to-purple-100 border border-white/30 shadow-[0_20px_80px_rgba(0,0,0,0.08)]">
+
+            {/* HERO BG */}
+
+            <div className="absolute inset-0 overflow-hidden">
+
+              <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-pink-400/20 rounded-full blur-[120px]" />
+
+              <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-400/20 rounded-full blur-[120px]" />
+
             </div>
-          ))}
-        </section>
 
-        {/* 🎯 CATEGORIES */}
-        <section>
-          <h2 className="text-3xl font-bold mb-8">Shop by Category</h2>
+            <div className="relative z-10 grid lg:grid-cols-2 gap-16 items-center px-8 py-16 lg:px-20 lg:py-24">
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { name: "Onesies", img: "/cat1.jpg" },
-              { name: "T-Shirts", img: "/cat2.jpg" },
-              { name: "Dresses", img: "/cat3.jpg" },
-              { name: "Winter", img: "/cat4.jpg" },
-            ].map((cat) => (
-              <div
-                key={cat.name}
-                className="group relative rounded-2xl overflow-hidden cursor-pointer"
+              {/* LEFT */}
+
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  y: 40,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  duration: 0.7,
+                }}
               >
-                <Image
-                  src={cat.img}
-                  alt={cat.name}
-                  width={300}
-                  height={200}
-                  className="object-cover group-hover:scale-110 transition"
-                />
 
-                <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                  <p className="text-white font-bold text-lg">
-                    {cat.name}
-                  </p>
+                {/* TAG */}
+
+                <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white shadow-lg border border-pink-100 mb-8">
+
+                  <Sparkles size={16} className="text-pink-500" />
+
+                  <span className="text-sm font-semibold text-gray-700">
+                    Premium Kids Fashion
+                  </span>
+
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
 
-        {/* 🛍️ PRODUCTS */}
-        <section>
-          <div className="flex justify-between mb-6">
-            <h2 className="text-3xl font-bold">Featured</h2>
-            <Link href="/products" className="text-pink-500">
-              View All →
-            </Link>
-          </div>
+                {/* TITLE */}
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {featuredProducts.map((p) => (
-              <div
-                key={p.id}
-                className="hover:-translate-y-2 transition"
+                <h1 className="text-5xl lg:text-7xl font-black leading-[1.05] text-gray-900">
+
+                  Fashion For
+                  <span className="block bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+                    Little Stars ✨
+                  </span>
+
+                </h1>
+
+                {/* DESC */}
+
+                <p className="mt-8 text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl">
+
+                  Discover premium baby clothing crafted
+                  with softness, comfort, elegance, and
+                  modern fashion trends for your little ones.
+
+                </p>
+
+                {/* BUTTONS */}
+
+                <div className="flex flex-wrap gap-5 mt-10">
+
+                  <Link
+                    href="/products"
+                    className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white font-bold shadow-2xl hover:scale-105 transition-all duration-300"
+                  >
+
+                    Shop Collection
+
+                    <ArrowRight
+                      size={18}
+                      className="group-hover:translate-x-1 transition"
+                    />
+
+                  </Link>
+
+                  <Link
+                    href="/about"
+                    className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-white border border-gray-200 shadow-lg font-semibold hover:bg-gray-50 transition-all duration-300"
+                  >
+
+                    Learn More
+
+                  </Link>
+
+                </div>
+
+                {/* STATS */}
+
+                <div className="grid grid-cols-3 gap-6 mt-14">
+
+                  {[
+                    {
+                      value: "10K+",
+                      label: "Happy Parents",
+                    },
+                    {
+                      value: "4.9★",
+                      label: "Customer Rating",
+                    },
+                    {
+                      value: "500+",
+                      label: "Premium Products",
+                    },
+                  ].map((item, index) => (
+                    <div
+                      key={index}
+                      className="rounded-2xl bg-white/70 backdrop-blur-xl p-5 shadow-lg border border-white/40"
+                    >
+
+                      <h3 className="text-2xl lg:text-3xl font-black text-pink-500">
+                        {item.value}
+                      </h3>
+
+                      <p className="text-sm text-gray-500 mt-1">
+                        {item.label}
+                      </p>
+
+                    </div>
+                  ))}
+
+                </div>
+
+              </motion.div>
+
+              {/* RIGHT */}
+
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  scale: 0.9,
+                }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                }}
+                transition={{
+                  duration: 0.7,
+                }}
+                className="relative"
               >
-                <ProductCard product={p} />
+
+                {/* FLOATING CARD */}
+
+                <div className="absolute -top-6 -left-6 z-20 rounded-3xl bg-white shadow-2xl p-5 border border-white/50 backdrop-blur-xl">
+
+                  <div className="flex items-center gap-3">
+
+                    <div className="w-12 h-12 rounded-2xl bg-pink-100 flex items-center justify-center">
+
+                      <Star className="text-pink-500" />
+
+                    </div>
+
+                    <div>
+
+                      <h4 className="font-bold">
+                        Premium Quality
+                      </h4>
+
+                      <p className="text-sm text-gray-500">
+                        Organic Soft Fabric
+                      </p>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+                {/* IMAGE */}
+
+                <div className="relative overflow-hidden rounded-[40px] shadow-[0_20px_80px_rgba(0,0,0,0.12)]">
+
+                  <Image
+                    src="/baby-hero.jpg"
+                    alt="Baby Fashion"
+                    width={700}
+                    height={700}
+                    priority
+                    className="w-full h-full object-cover"
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
+
+                </div>
+
+                {/* FLOATING BOTTOM */}
+
+                <div className="absolute -bottom-6 right-0 z-20 rounded-3xl bg-white shadow-2xl p-5 border border-white/50 backdrop-blur-xl">
+
+                  <div className="flex items-center gap-4">
+
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-500 text-white flex items-center justify-center">
+
+                      <ShoppingBag />
+
+                    </div>
+
+                    <div>
+
+                      <h4 className="font-bold text-lg">
+                        New Collection
+                      </h4>
+
+                      <p className="text-gray-500 text-sm">
+                        Trending Fashion 2026
+                      </p>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </motion.div>
+
+            </div>
+
+          </section>
+
+          {/* ================= TRUST SECTION ================= */}
+
+          <section className="grid md:grid-cols-3 gap-8">
+
+            {[
+              {
+                icon: Truck,
+                title: "Fast Delivery",
+                desc: "Quick and safe delivery across India.",
+              },
+              {
+                icon: ShieldCheck,
+                title: "Secure Payments",
+                desc: "100% secure and protected checkout.",
+              },
+              {
+                icon: HeartHandshake,
+                title: "Premium Support",
+                desc: "Friendly customer support team.",
+              },
+            ].map((item, index) => {
+              const Icon = item.icon;
+
+              return (
+                <motion.div
+                  key={index}
+                  whileHover={{
+                    y: -8,
+                  }}
+                  className="rounded-[30px] bg-white/70 backdrop-blur-2xl border border-white/40 p-8 shadow-[0_10px_40px_rgba(0,0,0,0.06)]"
+                >
+
+                  <div className="w-16 h-16 rounded-3xl bg-gradient-to-r from-pink-500 to-purple-500 flex items-center justify-center text-white shadow-lg mb-6">
+
+                    <Icon size={28} />
+
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-gray-900">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-gray-600 mt-3 leading-relaxed">
+                    {item.desc}
+                  </p>
+
+                </motion.div>
+              );
+            })}
+
+          </section>
+
+          {/* ================= CATEGORIES ================= */}
+
+          <section>
+
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-12">
+
+              <div>
+
+                <p className="text-pink-500 font-semibold uppercase tracking-[4px]">
+                  Categories
+                </p>
+
+                <h2 className="text-4xl lg:text-5xl font-black mt-3">
+                  Shop By Category
+                </h2>
+
               </div>
-            ))}
-          </div>
-        </section>
 
-        {/* ⭐ TESTIMONIALS */}
-        <section className="bg-white p-10 rounded-3xl shadow text-center">
-          <h2 className="text-3xl font-bold mb-8">Loved by Parents 💕</h2>
+              <Link
+                href="/products"
+                className="inline-flex items-center gap-2 text-pink-500 font-semibold"
+              >
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {["Amazing quality!", "So soft!", "Best purchase!"].map((t, i) => (
-              <div key={i} className="p-5 border rounded-xl">
-                <p>"{t}"</p>
-                <p className="text-pink-500 mt-2">— Customer</p>
+                Browse All
+
+                <ArrowRight size={18} />
+
+              </Link>
+
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+              {categories.map((cat, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{
+                    y: -8,
+                  }}
+                  className="group relative overflow-hidden rounded-[32px] shadow-[0_10px_50px_rgba(0,0,0,0.08)]"
+                >
+
+                  <div className="relative h-[320px]">
+
+                    <Image
+                      src={cat.image}
+                      alt={cat.name}
+                      fill
+                      className="object-cover group-hover:scale-110 transition duration-700"
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+
+                    <div className="absolute bottom-6 left-6 right-6">
+
+                      <div className="flex items-center justify-between">
+
+                        <div>
+
+                          <h3 className="text-2xl font-bold text-white">
+                            {cat.name}
+                          </h3>
+
+                          <p className="text-white/80 mt-1">
+                            Explore Collection
+                          </p>
+
+                        </div>
+
+                        <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-xl flex items-center justify-center text-white">
+
+                          <ArrowRight size={20} />
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </motion.div>
+              ))}
+
+            </div>
+
+          </section>
+
+          {/* ================= PRODUCTS ================= */}
+
+          <section>
+
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-12">
+
+              <div>
+
+                <p className="text-pink-500 font-semibold uppercase tracking-[4px]">
+                  Featured
+                </p>
+
+                <h2 className="text-4xl lg:text-5xl font-black mt-3">
+                  Trending Products
+                </h2>
+
               </div>
-            ))}
-          </div>
-        </section>
 
-        {/* 🎁 NEWSLETTER */}
-        <section className="bg-gradient-to-r from-pink-500 to-purple-500 text-white p-10 rounded-3xl text-center">
+              <Link
+                href="/products"
+                className="inline-flex items-center gap-2 text-pink-500 font-semibold"
+              >
 
-          <h2 className="text-3xl font-bold">
-            Join Our Community 💌
-          </h2>
+                View All Products
 
-          <p className="mt-2">
-            Get updates, offers & new arrivals
-          </p>
+                <ArrowRight size={18} />
 
-          <div className="flex justify-center mt-6 gap-2">
-            <input
-              placeholder="Enter email"
-              className="p-3 rounded-xl text-black w-64"
-            />
-            <button className="bg-white text-pink-500 px-4 rounded-xl">
-              Subscribe
-            </button>
-          </div>
+              </Link>
 
-        </section>
+            </div>
 
+            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-10">
+
+              {featuredProducts.map((product) => (
+                <motion.div
+                  key={product.id}
+                  whileHover={{
+                    y: -10,
+                  }}
+                  transition={{
+                    duration: 0.3,
+                  }}
+                >
+
+                  <ProductCard product={product} />
+
+                </motion.div>
+              ))}
+
+            </div>
+
+          </section>
+
+          {/* ================= TESTIMONIALS ================= */}
+
+          <section className="relative overflow-hidden rounded-[40px] bg-gradient-to-br from-white to-pink-50 border border-white/40 shadow-[0_20px_80px_rgba(0,0,0,0.06)] px-8 py-16 lg:px-16">
+
+            <div className="text-center max-w-3xl mx-auto">
+
+              <p className="text-pink-500 font-semibold uppercase tracking-[4px]">
+                Testimonials
+              </p>
+
+              <h2 className="text-4xl lg:text-5xl font-black mt-4">
+                Loved By Parents 💕
+              </h2>
+
+              <p className="mt-6 text-lg text-gray-600 leading-relaxed">
+                Thousands of parents trust LittleStyle
+                for premium comfort and modern fashion.
+              </p>
+
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-8 mt-16">
+
+              {testimonials.map((item, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{
+                    y: -8,
+                  }}
+                  className="rounded-[30px] bg-white shadow-xl border border-gray-100 p-8"
+                >
+
+                  <div className="flex gap-1 text-yellow-400 mb-6">
+
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        size={18}
+                        fill="currentColor"
+                      />
+                    ))}
+
+                  </div>
+
+                  <p className="text-gray-600 leading-relaxed text-lg">
+                    "{item.text}"
+                  </p>
+
+                  <div className="mt-8 flex items-center gap-4">
+
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 flex items-center justify-center text-white font-bold">
+                      {item.name[0]}
+                    </div>
+
+                    <div>
+
+                      <h4 className="font-bold text-lg">
+                        {item.name}
+                      </h4>
+
+                      <p className="text-gray-500">
+                        Verified Customer
+                      </p>
+
+                    </div>
+
+                  </div>
+
+                </motion.div>
+              ))}
+
+            </div>
+
+          </section>
+
+
+        </div>
       </div>
 
-      {/* 📈 Vercel Analytics */}
+      {/* ================= ANALYTICS ================= */}
+
       <Analytics />
+
     </>
   );
 }
