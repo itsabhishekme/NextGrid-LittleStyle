@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 import {
@@ -13,7 +14,6 @@ import {
   RotateCcw,
   Send,
   HeartHandshake,
-  Sparkles,
 } from "lucide-react";
 
 import {
@@ -142,11 +142,25 @@ export default function Footer() {
 
               <div>
 
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10 text-sm mb-6">
+                <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-white/10 border border-white/10 text-sm mb-6">
 
-                  <Sparkles size={16} />
+                  {/* FAVICON LOGO */}
 
-                  Join Our Fashion Community
+                  <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden">
+
+                    <Image
+                      src="/favicon.ico"
+                      alt="Logo"
+                      width={20}
+                      height={20}
+                      className="object-contain"
+                    />
+
+                  </div>
+
+                  <span className="font-medium">
+                    Join Our Fashion Community
+                  </span>
 
                 </div>
 
@@ -241,11 +255,34 @@ export default function Footer() {
 
             <div className="flex items-center gap-4">
 
-              <div className="w-14 h-14 rounded-3xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shadow-xl">
+              {/* LOGO */}
 
-                <Sparkles className="text-white" />
+              <motion.div
+                whileHover={{
+                  rotate: 5,
+                  scale: 1.05,
+                }}
+                className="relative"
+              >
 
-              </div>
+                <div className="absolute inset-0 bg-pink-500/30 blur-2xl rounded-full" />
+
+                <div className="relative w-16 h-16 rounded-3xl bg-white flex items-center justify-center shadow-2xl overflow-hidden border border-white/10">
+
+                  <Image
+                    src="/favicon.ico"
+                    alt="LittleStyle Logo"
+                    width={42}
+                    height={42}
+                    className="object-contain"
+                    priority
+                  />
+
+                </div>
+
+              </motion.div>
+
+              {/* TEXT */}
 
               <div>
 
@@ -534,7 +571,19 @@ export default function Footer() {
 
           {/* LEFT */}
 
-          <div className="text-center lg:text-left">
+          <div className="flex items-center gap-3">
+
+            <div className="w-10 h-10 rounded-2xl bg-white flex items-center justify-center overflow-hidden">
+
+              <Image
+                src="/favicon.ico"
+                alt="Footer Logo"
+                width={24}
+                height={24}
+                className="object-contain"
+              />
+
+            </div>
 
             <p className="text-gray-400">
               © {new Date().getFullYear()} LittleStyle.
