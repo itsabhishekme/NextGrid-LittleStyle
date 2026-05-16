@@ -573,18 +573,6 @@ export default function Footer() {
 
           <div className="flex items-center gap-3">
 
-            <div className="w-10 h-10 rounded-2xl bg-white flex items-center justify-center overflow-hidden">
-
-              <Image
-                src="/favicon.ico"
-                alt="Footer Logo"
-                width={24}
-                height={24}
-                className="object-contain"
-              />
-
-            </div>
-
             <p className="text-gray-400">
               © {new Date().getFullYear()} LittleStyle.
               All rights reserved.
