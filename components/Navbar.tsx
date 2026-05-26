@@ -86,7 +86,7 @@ export default function Navbar() {
             <Link href="/" className="relative group">
               <div className="flex items-center gap-3">
 
-                {/* FAVICON LOGO */}
+                {/* LOGO */}
                 <motion.div
                   whileHover={{ rotate: 8, scale: 1.05 }}
                   transition={{ duration: 0.3 }}
@@ -96,7 +96,7 @@ export default function Navbar() {
 
                   <div className="relative w-12 h-12 rounded-2xl bg-white shadow-lg border border-gray-100 flex items-center justify-center overflow-hidden">
                     <Image
-                      src="/favicon.ico"
+                      src="/logo.png"
                       alt="Logo"
                       width={34}
                       height={34}

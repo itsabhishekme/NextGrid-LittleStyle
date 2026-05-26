@@ -144,12 +144,12 @@ export default function Footer() {
 
                 <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-white/10 border border-white/10 text-sm mb-6">
 
-                  {/* FAVICON LOGO */}
+                  {/* LOGO */}
 
                   <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden">
 
                     <Image
-                      src="/favicon.ico"
+                      src="/logo.png"
                       alt="Logo"
                       width={20}
                       height={20}
