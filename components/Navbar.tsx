@@ -75,46 +75,74 @@ export default function Navbar() {
         transition={{ duration: 0.5 }}
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-white/90 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border-b border-gray-100"
+            ? "bg-white/80 backdrop-blur-2xl border-b border-gray-100 shadow-[0_10px_40px_rgba(0,0,0,0.06)]"
             : "bg-white"
         }`}
       >
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <div className="flex items-center justify-between h-[82px]">
+          <div className="flex items-center justify-between h-[88px]">
 
             {/* ================= LOGO ================= */}
             <Link href="/" className="relative group">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
 
                 {/* LOGO */}
                 <motion.div
-                  whileHover={{ rotate: 8, scale: 1.05 }}
+                  whileHover={{
+                    scale: 1.08,
+                    rotate: 6,
+                  }}
                   transition={{ duration: 0.3 }}
                   className="relative"
                 >
-                  <div className="absolute inset-0 bg-pink-200 blur-xl opacity-40 rounded-full" />
 
-                  <div className="relative w-12 h-12 rounded-2xl bg-white shadow-lg border border-gray-100 flex items-center justify-center overflow-hidden">
-                    <Image
-                      src="/logo.png"
-                      alt="Logo"
-                      width={34}
-                      height={34}
-                      className="object-contain"
-                      priority
-                    />
+                  {/* GLOW */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-pink-400 via-rose-300 to-orange-300 blur-2xl opacity-40 group-hover:opacity-70 transition-all duration-500" />
+
+                  {/* ANIMATED BORDER */}
+                  <div className="absolute inset-0 rounded-full p-[2px] bg-gradient-to-br from-pink-500 via-rose-400 to-orange-300 animate-[spin_8s_linear_infinite]">
+                    <div className="w-full h-full rounded-full bg-white" />
+                  </div>
+
+                  {/* CIRCLE LOGO BOX */}
+                  <div className="relative w-[62px] h-[62px] rounded-full bg-white border border-white/40 shadow-[0_10px_35px_rgba(0,0,0,0.12)] backdrop-blur-xl flex items-center justify-center overflow-hidden">
+
+                    {/* INNER LIGHT */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white via-pink-50 to-orange-50 opacity-90 rounded-full" />
+
+                    {/* IMAGE */}
+                    <div className="relative w-[42px] h-[42px] rounded-full overflow-hidden flex items-center justify-center">
+                      <Image
+                        src="/logo.png"
+                        alt="LittleStyle Logo"
+                        fill
+                        className="object-cover"
+                        priority
+                      />
+                    </div>
                   </div>
                 </motion.div>
 
                 {/* BRAND TEXT */}
-                <div className="leading-tight">
-                  <h1 className="text-2xl font-black tracking-tight text-black">
-                    LittleStyle
-                  </h1>
+                <div className="leading-none">
 
-                  <p className="text-[10px] tracking-[4px] uppercase text-gray-400">
-                    Fashion Store
-                  </p>
+                  <motion.h1
+                    whileHover={{
+                      letterSpacing: "0.5px",
+                    }}
+                    className="text-[30px] font-black tracking-tight bg-gradient-to-r from-black via-gray-800 to-gray-500 bg-clip-text text-transparent"
+                  >
+                    LittleStyle
+                  </motion.h1>
+
+                  <div className="flex items-center gap-2 mt-2">
+
+                    <div className="w-8 h-[1px] bg-gradient-to-r from-pink-500 to-transparent" />
+
+                    <p className="text-[10px] uppercase tracking-[5px] text-gray-400 font-semibold">
+                      Luxury Fashion
+                    </p>
+                  </div>
                 </div>
               </div>
             </Link>
@@ -142,37 +170,36 @@ export default function Navbar() {
                     </span>
 
                     <span
-                      className={`absolute left-0 -bottom-2 h-[2px] rounded-full bg-black transition-all duration-300 ${
+                      className={`absolute left-0 -bottom-2 h-[2px] rounded-full bg-gradient-to-r from-pink-500 to-orange-400 transition-all duration-300 ${
                         active
                           ? "w-full"
                           : "w-0 group-hover:w-full"
                       }`}
                     />
-
                   </Link>
                 );
               })}
             </div>
 
-            {/* ================= ACTION BUTTONS ================= */}
+            {/* ================= ACTIONS ================= */}
             <div className="hidden lg:flex items-center gap-4">
 
               {/* SEARCH */}
-              <button className="w-11 h-11 rounded-2xl bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-all duration-300 hover:scale-105">
+              <button className="w-11 h-11 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-all duration-300 hover:scale-105">
                 <Search size={19} />
               </button>
 
               {/* WISHLIST */}
-              <button className="relative w-11 h-11 rounded-2xl bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-all duration-300 hover:scale-105">
+              <button className="relative w-11 h-11 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-all duration-300 hover:scale-105">
                 <Heart size={19} />
 
-                <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-black" />
+                <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-pink-500" />
               </button>
 
               {/* CART */}
               <Link
                 href="/cart"
-                className="relative flex items-center justify-center w-11 h-11 rounded-2xl bg-black text-white hover:scale-105 transition-all duration-300"
+                className="relative flex items-center justify-center w-11 h-11 rounded-full bg-black text-white hover:scale-105 transition-all duration-300 shadow-lg"
               >
                 <ShoppingCart size={20} />
 
@@ -187,7 +214,7 @@ export default function Navbar() {
                         stiffness: 400,
                         damping: 15,
                       }}
-                      className="absolute -top-2 -right-2 min-w-[22px] h-[22px] rounded-full bg-red-500 text-white text-[11px] flex items-center justify-center font-bold shadow-lg"
+                      className="absolute -top-2 -right-2 min-w-[22px] h-[22px] rounded-full bg-gradient-to-r from-pink-500 to-red-500 text-white text-[11px] flex items-center justify-center font-bold shadow-lg"
                     >
                       {cart.length}
                     </motion.span>
@@ -195,8 +222,8 @@ export default function Navbar() {
                 </AnimatePresence>
               </Link>
 
-              {/* CTA BUTTON */}
-              <button className="px-6 py-3 rounded-2xl bg-black text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+              {/* BUTTON */}
+              <button className="px-6 py-3 rounded-full bg-gradient-to-r from-black to-gray-800 text-white font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
                 Explore
               </button>
             </div>
@@ -207,7 +234,7 @@ export default function Navbar() {
               className="lg:hidden relative z-[60]"
               onClick={() => setOpen((prev) => !prev)}
             >
-              <div className="w-11 h-11 rounded-2xl bg-white shadow-md border border-gray-100 flex items-center justify-center">
+              <div className="w-11 h-11 rounded-full bg-white shadow-md border border-gray-100 flex items-center justify-center">
                 {open ? <X size={24} /> : <Menu size={24} />}
               </div>
             </button>
@@ -244,38 +271,47 @@ export default function Navbar() {
               {/* TOP */}
               <div className="p-6 border-b border-gray-100 flex items-center justify-between">
 
-                <div className="flex items-center gap-3">
+                {/* MOBILE LOGO */}
+                <div className="flex items-center gap-4">
 
-                  <div className="w-12 h-12 rounded-2xl bg-gray-100 flex items-center justify-center overflow-hidden">
-                    <Image
-                      src="/favicon.ico"
-                      alt="Logo"
-                      width={30}
-                      height={30}
-                      className="object-contain"
-                    />
+                  <div className="relative">
+
+                    <div className="absolute inset-0 rounded-full bg-pink-200 blur-xl opacity-50" />
+
+                    <div className="relative w-14 h-14 rounded-full bg-white border border-gray-100 shadow-lg flex items-center justify-center overflow-hidden">
+
+                      <div className="relative w-10 h-10 rounded-full overflow-hidden">
+                        <Image
+                          src="/logo.png"
+                          alt="LittleStyle Logo"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    </div>
                   </div>
 
                   <div>
-                    <h2 className="text-2xl font-black text-black">
+                    <h2 className="text-[26px] font-black tracking-tight bg-gradient-to-r from-black to-gray-500 bg-clip-text text-transparent">
                       LittleStyle
                     </h2>
 
-                    <p className="text-xs text-gray-400">
-                      Premium Fashion
+                    <p className="text-[10px] uppercase tracking-[4px] text-gray-400 mt-1">
+                      Luxury Fashion
                     </p>
                   </div>
                 </div>
 
+                {/* CLOSE */}
                 <button
                   onClick={() => setOpen(false)}
-                  className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center"
+                  className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center"
                 >
                   <X />
                 </button>
               </div>
 
-              {/* MENU ITEMS */}
+              {/* MENU */}
               <div className="p-6 space-y-3">
 
                 {navItems.map((item, index) => {
@@ -321,16 +357,15 @@ export default function Navbar() {
                     </span>
                   </div>
 
-                  <span className="bg-red-500 px-3 py-1 rounded-full text-sm">
+                  <span className="bg-gradient-to-r from-pink-500 to-red-500 px-3 py-1 rounded-full text-sm">
                     {cart.length}
                   </span>
                 </Link>
 
                 {/* CTA */}
-                <button className="w-full mt-5 py-4 rounded-2xl bg-black text-white font-bold shadow-xl hover:scale-[1.02] transition-all duration-300">
+                <button className="w-full mt-5 py-4 rounded-full bg-gradient-to-r from-black to-gray-800 text-white font-bold shadow-xl hover:scale-[1.02] transition-all duration-300">
                   Start Shopping
                 </button>
-
               </div>
             </motion.div>
           </>
@@ -338,7 +373,7 @@ export default function Navbar() {
       </AnimatePresence>
 
       {/* SPACING */}
-      <div className="h-[82px]" />
+      <div className="h-[88px]" />
     </>
   );
 }
