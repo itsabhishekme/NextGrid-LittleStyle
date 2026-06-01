@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">my-app</string>
-    <string name="title_activity_main">my-app</string>
-    <string name="package_name">com.myapp.mobile</string>
-    <string name="custom_url_scheme">com.myapp.mobile</string>
+    <string name="app_name">LittleStyle</string>
+    <string name="title_activity_main">LittleStyle</string>
+    <string name="package_name">com.nextgrid.littlestyle</string>
+    <string name="custom_url_scheme">com.nextgrid.littlestyle</string>
 </resources>

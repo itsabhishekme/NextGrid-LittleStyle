@@ -1,4 +1,4 @@
-package com.myapp.mobile;
+package com.nextgrid.littlestyle;
 
 import com.getcapacitor.BridgeActivity;
 
